@@ -153,7 +153,7 @@ module AssetSync
         allow_file = true
         self.config.ignored_remote_files.each do |fr|
           if fr.is_a? Regexp
-            allow_file = false if f.key ~= fr
+            allow_file = false if f.key =~ fr
           else
             allow_file = false if f.key == fr
           end
