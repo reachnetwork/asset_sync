@@ -144,7 +144,22 @@ module AssetSync
       # fixes: https://github.com/rumblelabs/asset_sync/issues/16
       #        (work-around for https://github.com/fog/fog/issues/596)
       files = []
-      bucket.files.each { |f| files << f.key }
+      bucket.files.each do |f|
+        if self.config.ignored_remote_files.blank?
+          files << f.key
+          next
+        end
+
+        allow_file = true
+        self.config.ignored_remote_files.each do |fr|
+          if fr.is_a? Regexp
+            allow_file = false if f.key ~= fr
+          else
+            allow_file = false if f.key == fr
+          end
+        end
+        files << f.key if allow_file
+      end
       return files
     end
 

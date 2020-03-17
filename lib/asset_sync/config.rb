@@ -18,6 +18,7 @@ module AssetSync
     attr_accessor :log_silently
     attr_accessor :always_upload
     attr_accessor :ignored_files
+    attr_accessor :ignored_remote_files
     attr_accessor :prefix
     attr_accessor :enabled
     attr_accessor :custom_headers
@@ -80,6 +81,7 @@ module AssetSync
       self.log_silently = true
       self.always_upload = []
       self.ignored_files = []
+      self.ignored_remote_files = []
       self.custom_headers = {}
       self.enabled = true
       self.run_on_precompile = true
@@ -219,6 +221,7 @@ module AssetSync
       self.fail_silently          = yml["fail_silently"] if yml.has_key?("fail_silently")
       self.always_upload          = yml["always_upload"] if yml.has_key?("always_upload")
       self.ignored_files          = yml["ignored_files"] if yml.has_key?("ignored_files")
+      self.ignored_remote_files          = yml["ignored_remote_files"] if yml.has_key?("ignored_remote_files")
       self.custom_headers          = yml["custom_headers"] if yml.has_key?("custom_headers")
       self.run_on_precompile      = yml["run_on_precompile"] if yml.has_key?("run_on_precompile")
       self.invalidate             = yml["invalidate"] if yml.has_key?("invalidate")
